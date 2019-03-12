@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // Inisiasi API url
-    var _url = 'http://my-json-server.typicode.com/DesertHaze99/belajar-api/mahasiswa';
+    var _url = 'https://my-json-server.typicode.com/DesertHaze99/belajar-api/mahasiswa';
 
     // Untuk menampung data semua mahasiswa
     var result = '';
