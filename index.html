@@ -3,6 +3,7 @@
         <title>Belajar PWA</title>
         <link rel="stylesheet" href="/css/main.css">
         <link rel="manifest" href="/manifest.json">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     </head>
 
     <body>
@@ -10,8 +11,13 @@
         <h3>Belajar PWA</h3>
         <br><br>
 
-        <button id="show-notification"> Show Notification </button>
+        <div id="online-status">Anda online</div>
         <br>
+        <button id="load-in-bg" class="btn btn-danger" > Load in Background </button>
+        <br><br>
+
+        <button id="show-notification" class="btn btn-success"> Show Notification </button>
+        <br> <br>
         
         <label for="mhs-select">Gender</label>
         <select id="mhs-select">

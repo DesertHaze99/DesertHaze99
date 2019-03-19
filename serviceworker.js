@@ -23,6 +23,7 @@ self.addEventListener('install', function(event){
             }
         )
     )
+    self.skipWaiting();
 });
 
 //aktifasi SW
@@ -39,6 +40,9 @@ self.addEventListener('activate', function(event){
             );
         })
     );
+    if(self.clients && clients.claim){
+        clients.claim();
+    }
 });
 
 //fetch cache
@@ -103,9 +107,27 @@ self.addEventListener('notificationclick', function(n){
     if(action==='close'){
         notification.close();
     } else {
-        clients.openWindow('localhost:8000/');
+        clients.openWindow('https://deserthaze99.github.io//');
         notification.close();
     }
-
-    
 });
+
+    self.addEventListener('sync', function(event){
+        console.log('firing sync');
+        if(event.tag === 'image-fetch'){
+            console.log('sync event fired');
+            event.waitUntil(fetchImage());
+        }
+    })
+
+    function fetchImage(){
+        console.log('firing fetchImage()');
+        fetch('/images/15083098352901077999132.jpg').then(function(response){
+            return response;
+        }).then(function(text){
+            console.log('Request success', text);
+        }).catch(function(err){
+            console.log('Request failed', err)
+        })
+    }
+    

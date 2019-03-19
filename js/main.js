@@ -118,16 +118,74 @@ $(document).ready(function(){
         $("#show-notification").on('click', function(){
             displayNotification();
     });
+
+    function isOnline(){
+        var connectionStatus = $('#online-status');
+        if(navigator.onLine){
+            connectionStatus.html = '<p> Anda online </p>';
+        } else {
+            connectionStatus.html = '<p>Anda offline </p>';
+        }
+    }
+
+    window.addEventListener('online', isOnline);
+    window.addEventListener('offline', isOnline);
+    isOnline();
+
 }); // tutup ready function
+
+
+
 
 if('serviceWorker' in navigator){
     window.addEventListener('load', function(){
         navigator.serviceWorker.register('/serviceworker.js').then(
             function(reg){
-                console.log('SW registration success, scope : ',reg.scope);
+                document.getElementById('load-in-bg')
+                .addEventListener('click', function(){ // function(){} bisa ditulis ()=>{}
+                    reg.sync.register('image-fetch').then(function(){ // function(){} bisa ditulis ()=>{}
+                        console.log('sync registered');
+                    }).catch(function(err){ // function(){} bisa ditulis ()=>{}
+                        console.log('unable to fetch image, err:', err);
+                    })
+                })
             }, function(err){
                 console.log('SW registration failed : ', err);
             }
         )
     })
+}
+
+
+/*
+* IndexedDB
+*/
+createDatabase();
+
+function createDatabase(){
+    if(!('indexedDB' in window)){
+        console.log('Web Browser tidak mendukung indexed DB');
+        return;
+    }
+    var request = window.indexedDB.open('latihan-pwa',1);
+    request.onerror = errorDbHanddle;
+    request.onupgradeneeded = function(e){
+        var db = e.target.result;
+        db.onerror = errorDbHanddle;
+
+        var objectStore = db.createObjectStore('mahasiswa',{keyPath : 'nim'});
+        console.log('Object store mahasiswa berhasil dibuat');
+    }
+
+    request.onsuccess = function(e){
+        db = e.target.result;
+        db.error = errorDbHanddle;
+        console.log('Berhasil melakukan koneksi ke database lokal');
+
+        // melakukan sesuatu
+    }
+}
+
+function errorDbHanddle(e){
+    console.log('Error DB : '+e.target.errorCode);
 }
