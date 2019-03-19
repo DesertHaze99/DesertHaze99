@@ -134,8 +134,6 @@ self.addEventListener('notificationclick', function(n){
             console.log('Request failed', err)
         })
     }
-    
-<<<<<<< HEAD
-=======
+
 });
->>>>>>> 0c5cec41bc1622a7514505228b1293920072aa13
+
