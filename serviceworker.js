@@ -103,7 +103,7 @@ self.addEventListener('notificationclick', function(n){
     if(action==='close'){
         notification.close();
     } else {
-        clients.openWindow('https://deserthaze99.github.io//');
+        clients.openWindow('https://deserthaze99.github.io');
         notification.close();
     }
 
