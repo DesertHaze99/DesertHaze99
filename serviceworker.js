@@ -107,7 +107,11 @@ self.addEventListener('notificationclick', function(n){
     if(action==='close'){
         notification.close();
     } else {
+<<<<<<< HEAD
         clients.openWindow('https://deserthaze99.github.io//');
+=======
+        clients.openWindow('https://deserthaze99.github.io');
+>>>>>>> 0c5cec41bc1622a7514505228b1293920072aa13
         notification.close();
     }
 });
@@ -131,3 +135,7 @@ self.addEventListener('notificationclick', function(n){
         })
     }
     
+<<<<<<< HEAD
+=======
+});
+>>>>>>> 0c5cec41bc1622a7514505228b1293920072aa13
