@@ -85,4 +85,27 @@ self.addEventListener('fetch', function(event){
     //         return fetch(event.request);
     //     })
     // )
-})
+});
+
+self.addEventListener('notificationclose', function(n){
+    var notification = n.notification;
+    var primaryKey = notification.data.primaryKey;
+
+    console.log('Closed Notification : ' + primaryKey);
+});
+
+self.addEventListener('notificationclick', function(n){
+    var notification = n.notification;
+    var primaryKey = notification.data.primaryKey;
+    var action = n.action;
+
+    console.log('Notification : ', primaryKey);
+    if(action==='close'){
+        notification.close();
+    } else {
+        clients.openWindow('localhost:8000/');
+        notification.close();
+    }
+
+    
+});
